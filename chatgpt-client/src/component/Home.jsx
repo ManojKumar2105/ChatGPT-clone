@@ -18,7 +18,7 @@ const Home = () =>{
   
   function NewChat(){
     setChatlog([]);
-    // localStorage.removeItem("Answers");
+    
   }
 
   function clearData(){
@@ -27,9 +27,6 @@ const Home = () =>{
     setAnswers([null])
   }
    
-  // useEffect(()=>{
-    
-  //  },[])
 
    useEffect(()=>{
     localStorage.setItem("Answers",JSON.stringify(answers))
@@ -58,6 +55,8 @@ const Home = () =>{
       setChatlog(ChatLogNew);
       setHistory([...history,input]);
       const messages = ChatLogNew.map((message)=>message.message).join("\n")
+
+      // Fetch
       const response = await fetch("http://localhost:4000/",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -66,6 +65,7 @@ const Home = () =>{
           message:messages
         })
       });
+      // Response
       const data = await response.json();
       setChatlog([...ChatLogNew,{user:"gpt",message:`${data.message}`}]);
       console.log(data);
@@ -75,7 +75,6 @@ const Home = () =>{
 
     }
     function handleLog(e){
-      // setInput(e.target.innerHTML)
       navigate("/Answer")
     }
 
@@ -86,22 +85,17 @@ const Home = () =>{
             <h5 className='new'>+ New Chat</h5>   
           </div> 
           <div className='history'>
-        {/* {chatlog.map((message,index)=>(
-          (message.user == "me" && index==0) &&
-          <div key={index} className='previousValues' onClick={handleLog} >
-            {message.message}
-          </div>
-      ))} */}
-      {historyStore!=null && historyStore.map((message,index)=>(
-       (index==0) && <div key={index} className='previousValues' onClick={handleLog} >
-            {message}
-          </div>
-      ))}
-          <div className='clearbtn' onClick={clearData}>
-            <h5 className='new'>Clear Data</h5>   
-          </div>
-
+          {historyStore!=null && historyStore.map((message,index)=>(
+           (index==0) && <div key={index} className='previousValues' onClick={handleLog} >
+                {message}
+              </div>
+          ))}      
         </div>
+        <div className="delbtn">
+          <div className='clearbtn' onClick={clearData}>
+              <h5 className='new'>Clear Data</h5>
+          </div>
+          </div>
        </div>
        <div className='mainside'>
         <div className='chatlog'>
