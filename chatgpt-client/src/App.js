@@ -1,11 +1,9 @@
 import './App.css';
-import ChatMessage from './ChatMessage';
-import {useState} from "react";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import Home from './component/Home';
-import Login from './component/login';
+import Login from './component/Login';
 import Answer from './component/Answer';
-// import { application } from 'express';
+
 
 function App() {
   return(

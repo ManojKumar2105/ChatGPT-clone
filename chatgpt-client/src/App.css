@@ -3,14 +3,26 @@
   display: flex;
   background-color: #282c34;
   color: white;
-  /* height: 100vh; */
-  /* overflow-y: scroll; */
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   overflow: hidden;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background-color: white;
+      border: 1px solid #cacaca;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: gray;
+  }
 }
 
 *{
@@ -29,6 +41,8 @@
   background: #343541;
   position: relative;
   overflow-y: scroll;
+  
+
 }
 
 .sidebtn{
@@ -43,14 +57,10 @@
   flex-direction: column;
   height: 90%;
   justify-content: flex-end;
-  /* align-content: flex-end; */
 }
 
 .clearbtn{
-  /* display: flex; */
   padding: 17px;
-  /* position: relative; */
-  /* top: 560px; */
   border: 1px solid white;
   border-radius: 5px;
   transition: ease 0.25s all;
@@ -88,17 +98,6 @@
   padding: 8px;
   color: white;
 }
-
-
-/* input{
-  width:300px;
-  height: 35px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-color: aliceblue;
-} */
-
 
 .chat-message-center{
   margin-left: auto;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatMessage from '../ChatMessage';
 import '../App.css'; 
 import { useNavigate } from "react-router";
@@ -40,10 +40,11 @@ const Home = () =>{
    useEffect(()=>{
     localStorage.setItem("Chatlog",JSON.stringify(chatlog))
   },[chatlog])
+   
 
 
   const historyStore = JSON.parse(localStorage.getItem('History'));
-  const chatStore = JSON.parse(localStorage.getItem('Chatlog'));
+  
 
 
 
@@ -84,13 +85,13 @@ const Home = () =>{
           <div className='sidebtn' onClick={NewChat}>
             <h5 className='new'>+ New Chat</h5>   
           </div> 
-          <div className='history'>
-          {historyStore!=null && historyStore.map((message,index)=>(
-           (index==0) && <div key={index} className='previousValues' onClick={handleLog} >
-                {message}
-              </div>
-          ))}      
-        </div>
+            <div className='history'>
+            {historyStore!=null && historyStore.map((message,index)=>(
+            (index===0) && <div key={index} className='previousValues' onClick={handleLog} >
+                  {message}
+                </div>
+            ))}      
+          </div>
         <div className="delbtn">
           <div className='clearbtn' onClick={clearData}>
               <h5 className='new'>Clear Data</h5>
@@ -100,14 +101,14 @@ const Home = () =>{
        <div className='mainside'>
         <div className='chatlog'>
         { chatlog.map((message,index,array)=>(
-          (index == array.length-1) ? (loading ?  <ClipLoader color={"#36d7b7"} /> : <ChatMessage key={index} message={message} loading = {loading} />) : <ChatMessage key={index} message={message} loading = {loading} />  
+          (index === array.length-1) ? (loading ?  <ClipLoader color={"#36d7b7"} /> : <ChatMessage key={index} message={message} loading = {loading} />) : <ChatMessage key={index} message={message} loading = {loading} />  
          
         ))}  
         </div>
           <div className='chat-input'>
           <form onSubmit={handleSubmit}>
-            <input className='chat-prompt' placeholder='Type your message' rows="1" onChange={(e)=>setInput(e.target.value) } value={input} />
-            {/* <button type='submit' className='btn'>Submit</button> */}
+              <input className="chat-prompt" placeholder='Type your message' rows="1" onChange={(e)=>setInput(e.target.value) } value={input} />
+
             </form>
           </div>
        </div>
